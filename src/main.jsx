@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import App from './Props.jsx'
+import App from './Tailwind.jsx'
 import './index.css'
 
 ReactDOM.createRoot(document.getElementById('root')).render(

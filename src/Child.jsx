@@ -11,7 +11,7 @@ const Child = (props) => {
     </div> */}
 
     <div style={{width:"500px",height:"300px",border:"1px solid black",display:"flex",alignItems:"center"}}>
-      <img src={mydata.myimage} alt="" />
+      <img src={props.mydata} alt="" />
     </div>
       
     </>
