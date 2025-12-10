@@ -1,0 +1,8 @@
+React task
+1.calculater
+2.counter App
+3.Todo list (add,edit,delete,complete)
+4.Roll the dice
+5.Mini calender
+6.Emojis rating
+

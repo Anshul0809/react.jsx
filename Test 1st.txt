@@ -1,0 +1,29 @@
+Test 
+
+1. Create a text input and a button. When typing in the input and clicking the button, the text should appear below as a heading.
+
+2.Make a counter app with Reset button that sets the count back too.
+
+3.Create a list of 5 numbers [1,2,3,4,5]. Using •map(),
+display them but multiply each by 2.
+
+04. Make Two button Red and Green and a box change the bcolor on clicking the button.
+
+Q5. Create a component where you have an input box and a button "Add".
+When you click, add the Input value into an array and show all values as a list.
+
+6.Pass name= "Laptop" and price="50000" as props to a child component and display them inside <h2> and <p>.
+
+
+library -- React bits ,swiper js ,sweetAlert,AOS,Vantajs(3d Animation),Typesjs.
+
+Hooks Name
+1.useState
+2.useContext
+3.useEffect
+7.useNavigate
+
+4.useParam 
+5.useRef
+6.useMemo
+
