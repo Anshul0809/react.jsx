@@ -2,6 +2,10 @@ import React from 'react'
 import './Tailwind.css'
 
 const Tailwind = () => {
+
+  let Anshul=()=>{
+    alert ('hello Anshul')
+  }
   return (
     <>
        {/* <h1 className='text-red-500'>Anshul </h1> */}
@@ -33,7 +37,7 @@ const Tailwind = () => {
 
 
          </ul>
-         <button className='border p-4 rounded-2xl'>download</button>
+         <button className='border p-4 rounded-2xl' onClick={Anshul}>download</button>
     </header>
     </>
   )
