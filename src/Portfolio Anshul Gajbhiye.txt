@@ -1,0 +1,195 @@
+Portfolio Anshul Gajbhiye
+
+// === React Portfolio (Multi-Component Structure + Dark Mode + Animations) ===
+// You can split these into separate files if needed.
+// Uses Tailwind + React Router + Dark Mode Toggle
+
+import React, { useState, useEffect } from "react";
+import { BrowserRouter, Routes, Route, Link, NavLink } from "react-router-dom";
+import { motion } from "framer-motion";
+
+// ------------------ DARK MODE HOOK ------------------
+function useDarkMode() {
+  const [dark, setDark] = useState(() => {
+    const saved = localStorage.getItem("theme");
+    return saved === "dark";
+  });
+
+  useEffect(() => {
+    if (dark) {
+      document.documentElement.classList.add("dark");
+      localStorage.setItem("theme", "dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+      localStorage.setItem("theme", "light");
+    }
+  }, [dark]);
+
+  return [dark, setDark];
+}
+
+// ------------------ NAVBAR ------------------
+const Navbar = ({ dark, setDark }) => (
+  <nav className="bg-white/80 dark:bg-slate-900/80 backdrop-blur sticky top-0 z-30 shadow-sm">
+    <div className="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between">
+      <Link to="/" className="text-2xl font-extrabold dark:text-white">Anshul G.</Link>
+
+      <div className="space-x-4">
+        <NavItem to="/">Home</NavItem>
+        <NavItem to="/projects">Projects</NavItem>
+        <NavItem to="/about">About</NavItem>
+        <NavItem to="/contact">Contact</NavItem>
+      </div>
+
+      <button
+        onClick={() => setDark(!dark)}
+        className="ml-4 px-3 py-2 rounded-md border dark:border-gray-600 dark:text-white"
+      >
+        {dark ? "Light" : "Dark"}
+      </button>
+    </div>
+  </nav>
+);
+
+const NavItem = ({ to, children }) => (
+  <NavLink
+    to={to}
+    className={({ isActive }) =>
+      `px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-100 dark:hover:bg-slate-700 transition ${
+        isActive ? "font-bold text-blue-600 dark:text-blue-400" : "text-gray-700 dark:text-gray-200"
+      }`
+    }
+  >
+    {children}
+  </NavLink>
+);
+
+// ------------------ HOME PAGE ------------------
+const Home = () => (
+  <motion.section
+    initial={{ opacity: 0, y: 20 }}
+    animate={{ opacity: 1, y: 0 }}
+    className="max-w-5xl mx-auto px-4 py-12 dark:text-white"
+  >
+    <h1 className="text-4xl font-extrabold">Hi, I'm Anshul Gajbhiye</h1>
+
+    {/* Profile Photo Placeholder */}
+    <div className="mt-6 w-40 h-40 rounded-full overflow-hidden shadow-lg">
+      <img
+        src="https://images.unsplash.com/photo-1603415526960-f7e0328c63b1?auto=format&fit=crop&w=400&q=80"
+        alt="profile"
+        className="w-full h-full object-cover"
+      />
+    </div>
+    <p className="mt-4 text-lg text-gray-700 dark:text-gray-300">
+      B.Tech student in Data Science. Learning Python Full Stack and Web Development. I build
+      small, clean web projects using React and Tailwind CSS.
+    </p>
+
+    <div className="mt-6 flex flex-wrap gap-2">
+      <Link to="/projects" className="px-4 py-2 rounded-md border dark:border-gray-600 dark:text-white">View Projects</Link>
+      <Link to="/about" className="px-4 py-2 rounded-md bg-slate-800 text-white">About Me</Link>
+    </div>
+
+    <div className="mt-8">
+      <h3 className="text-xl font-semibold">Skills</h3>
+      <div className="mt-3 grid grid-cols-2 sm:grid-cols-4 gap-2">
+        {['HTML', 'CSS', 'React', 'Python (in progress)'].map(skill => (
+          <span key={skill} className="px-3 py-2 bg-gray-100 dark:bg-slate-700 rounded text-center">
+            {skill}
+          </span>
+        ))}
+      </div>
+    </div>
+  </motion.section>
+);
+
+// ------------------ PROJECTS ------------------
+const Projects = () => (
+  <section className="max-w-5xl mx-auto px-4 py-12 dark:text-white">
+    <h2 className="text-2xl font-bold">Projects</h2>
+
+    <div className="mt-6 grid sm:grid-cols-2 gap-4">
+      <ProjectCard
+        title="Simple HTML Website"
+        desc="A basic static site using HTML and CSS."
+        tags={["HTML", "CSS"]}
+      />
+
+      <ProjectCard
+        title="Weather App (Upcoming)"
+        desc="React weather app using API."
+        tags={["React", "API"]}
+      />
+
+      <ProjectCard
+        title="Python Backend (Upcoming)"
+        desc="Small backend using Python Flask/Django."
+        tags={["Python", "Backend"]}
+      />
+    </div>
+  </section>
+);
+
+const ProjectCard = ({ title, desc, tags }) => (
+  <motion.div
+    whileHover={{ scale: 1.03 }}
+    className="p-4 border rounded-lg dark:border-gray-700 hover:shadow-md dark:hover:shadow-lg transition"
+  >
+    <h3 className="font-semibold text-lg">{title}</h3>
+    <p className="mt-2 text-sm text-gray-600 dark:text-gray-300">{desc}</p>
+
+    <div className="mt-3 flex flex-wrap gap-2">
+      {tags.map((t) => (
+        <span key={t} className="text-xs px-2 py-1 bg-gray-100 dark:bg-slate-700 rounded">{t}</span>
+      ))}
+    </div>
+  </motion.div>
+);
+
+// ------------------ ABOUT ------------------
+const About = () => (
+  <section className="max-w-4xl mx-auto px-4 py-12 dark:text-white">
+    <h2 className="text-2xl font-bold">About Me</h2>
+    <p className="mt-4 text-gray-700 dark:text-gray-300">
+      I am a Data Science student improving my full-stack skills using React, Tailwind,
+      and Python backend frameworks.
+    </p>
+  </section>
+);
+
+// ------------------ CONTACT ------------------
+const Contact = () => (
+  <section className="max-w-3xl mx-auto px-4 py-12 dark:text-white">
+    <h2 className="text-2xl font-bold">Contact</h2>
+    <p className="mt-3 text-gray-600 dark:text-gray-400">You can reach me at:
+    <br />
+    <strong>Email:</strong> anshul@example.com
+    <br />
+    <strong>Phone:</strong> +91 9876543210</p>
+  </section>
+);
+
+// ------------------ APP WRAPPER ------------------
+export default function App() {
+  const [dark, setDark] = useDarkMode();
+
+  return (
+    <BrowserRouter>
+      <div className="min-h-screen bg-white dark:bg-slate-900 transition">
+        <Navbar dark={dark} setDark={setDark} />
+
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/projects" element={<Projects />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/contact" element={<Contact />} />
+        </Routes>
+
+        <footer className="mt-12 border-t dark:border-gray-700 py-6 text-center text-sm text-gray-600 dark:text-gray-400">
+          Built with React + Tailwind • Class Task
+        </footer>
+      </div>
+    </BrowserRouter>
+  );
+}
