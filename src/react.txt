@@ -1,2 +1,10 @@
+react insttal
+1.npm creatre vite@latest
+2.reactReact
+3.javascript
+4.no 
+5.yes
+
+
 packeges command for downloads
 npm i react-router-dom
